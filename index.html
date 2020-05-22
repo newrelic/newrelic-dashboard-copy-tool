@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+  <!--  -->
+  <link rel="stylesheet" href="./styles.css" crossorigin="anonymous">
+
+
+  <title>New Relic Insights Dashboard Manager</title>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        <img src="https://newrelic.com/assets/newrelic/source/NewRelic-logo-bug.png" height="30" alt="New Relic Official Logo">
+        <span style="margin-left:1em">Insights Dashboard Copy</span>
+      </a>
+
+      <!-- <span class="navbar-text">
+        Navbar text with an inline element
+      </span> -->
+      <button class="btn btn-primary my-2 my-sm-0" >
+          <a class="custom-button" href="https://docs.newrelic.com/docs/apis/getting-started/intro-apis/understand-new-relic-api-keys#creating">
+            Setup your Admin user API key
+          </a>
+      </button>
+      
+
+      
+  </nav>
+
+  <!-- API key section -->
+  <div class="container-fluid">
+    <form>
+      <div class="row">
+        <div class="col">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="api-key-from-label">Source Admin API Key</span>
+            </div>
+            <input autofocus type="text" class="form-control" id="api-key-from-input" aria-describedby="basic-addon3" placeholder="API key for source account">
+          </div>
+          <div class="input-group mb-3">
+            <!-- Search -->
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="title-filter-label">Dashboard Title (optional)</span>
+            </div>
+            <input type="text" class="form-control" id="title-filter-input" placeholder="Find dashboards whose titles contain the following text">
+          </div>
+          <!-- Datacenter and Get button -->
+          <form id="source-button">
+            <div class="form-row">
+              <div class="col-2">
+                <label for="formControlSelect1">Select a region</label>
+              </div>
+              <div class="col-2">
+                <select class="form-control" id="sourceRegionSelect">
+                  <option>US</option>
+                  <option>EU</option>
+                </select>
+              </div>
+              <div class="col-2">
+                <input type="button" onclick="listDashboards()" class="btn btn-secondary mb-2" value="Get Dashboards">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="api-key-to-label">Destination Admin API Key</span>
+            </div>
+            <input type="text" class="form-control" id="api-key-to-input" aria-describedby="basic-addon3" placeholder="API key for destination account">
+          </div>
+          <div class="btn btn-default">
+            <input class="btn btn-default" type="checkbox" id="preserveFacet" data-toggle="tooltip" data-placement="bottom" title="Toggle to strip account id on import"  checked> Preserve self-facet linked dashboards</input>
+          </div>
+          <!-- Datacenter and transfer button -->
+          <form>
+            <div class="form-row">
+              <div class="col-2">
+                <label for="formControlSelect2">Select a region</label>
+              </div>
+              <div class="col-2">
+                <select class="form-control" id="destinationRegionSelect">
+                  <option>US</option>
+                  <option>EU</option>
+                </select>
+              </div>
+              <div class="col-2">
+                <input type="button" id="transfer-button" onclick="transferDashboardButton()" class="btn btn-secondary mb-2" value="Transfer Dashboards">
+                <input type="button" id="reset-list-button" onclick="resetTransferListButton()" class="btn btn-secondary mb-2" value="Reset List">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- Dashboard source & destination columns-->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <nav>
+          <ul style="display:none" class="pagination" id="results-pagination">
+            <li style="visibility:hidden" class="page-item" id="pagination-previous"><a class="page-link" href="#">Previous</a></li>
+            <li style="visibility:hidden" class="page-item" id="pagination-next"><a class="page-link">Next</a></li>
+          </ul>
+        </nav>
+        <ul class="list-group" id="source">
+        </ul>
+      </div>
+      <div class="col">
+        <ul class="list-group" id="destination">
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Status modal - appears when dashboard is transferring -->
+  <div class="modal fade" id="status-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Copying Dashboard</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <pre class="row" id="status-dashboard-console">
+
+          </pre>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script> -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+</body>
+
+</html>
+
+<script type="text/javascript" src='./script.js'></script>
