@@ -27,8 +27,8 @@
         Navbar text with an inline element
       </span> -->
       <button class="btn btn-primary my-2 my-sm-0" >
-          <a class="custom-button" href="https://docs.newrelic.com/docs/apis/getting-started/intro-apis/understand-new-relic-api-keys#creating">
-            Setup your Admin user API key
+          <a class="custom-button" href="https://docs.newrelic.com/docs/apis/get-started/intro-apis/types-new-relic-api-keys#rest-api-key">
+            Setup your REST API key
           </a>
       </button>
       
@@ -43,7 +43,7 @@
         <div class="col">
           <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <span class="input-group-text" id="api-key-from-label">Source Admin API Key</span>
+              <span class="input-group-text" id="api-key-from-label">Source REST API Key</span>
             </div>
             <input autofocus type="text" class="form-control" id="api-key-from-input" aria-describedby="basic-addon3" placeholder="API key for source account">
           </div>
@@ -75,12 +75,12 @@
         <div class="col">
           <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <span class="input-group-text" id="api-key-to-label">Destination Admin API Key</span>
+              <span class="input-group-text" id="api-key-to-label">Destination REST API Key</span>
             </div>
             <input type="text" class="form-control" id="api-key-to-input" aria-describedby="basic-addon3" placeholder="API key for destination account">
           </div>
           <div class="btn btn-default">
-            <input class="btn btn-default" type="checkbox" id="preserveFacet" data-toggle="tooltip" data-placement="bottom" title="Toggle to strip account id on import"  checked> Preserve self-facet linked dashboards</input>
+            <input class="btn btn-default" type="checkbox" id="preserveFacet" data-toggle="tooltip" data-placement="bottom" title="Toggle to strip facet filter"  checked> Preserve self-facet filtered dashboards</input>
           </div>
           <!-- Datacenter and transfer button -->
           <form>
