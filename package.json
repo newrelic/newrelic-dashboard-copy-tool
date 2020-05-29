@@ -9,7 +9,7 @@
   "author": "New Relic Expert Services",
   "license": "ISC",
   "dependencies": {
-    "cli-color": "^1.2.0",
+    "cli-color": "^1.4.0",
     "commander": "^2.16.0",
     "cors": "^2.8.4",
     "csvtojson": "^2.0.6",
