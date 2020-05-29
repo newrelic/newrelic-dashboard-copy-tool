@@ -14,7 +14,7 @@
     "cors": "^2.8.4",
     "csvtojson": "^2.0.6",
     "express": "^4.16.3",
-    "minimist": "^1.2.0",
+    "minimist": "^1.2.5",
     "request": "^2.87.0"
   }
 }
