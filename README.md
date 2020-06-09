@@ -12,6 +12,9 @@ Note on dashboard layouts:
 
 Currently the dashboard API only handles the [3 column layout](https://docs.newrelic.com/docs/insights/insights-api/manage-dashboards/insights-dashboard-api#schema) used by the Insights UI. Dashboards that have been created/modified in New Relic One use a 12 column layout. The layout for these dashboards may need to be edited after transfering.
 
+Note on cross-account charts:
+Dashboards can have charts which show data from different accounts. However, the dashboard API will only show details for charts with the same account ID as the API key. [Cross-account charts will be inaccessible](https://docs.newrelic.com/docs/insights/insights-api/manage-dashboards/insights-dashboard-api#requirements) by the API and fail to copy.
+
 ## Installation
 This tool does not need to be installed and can be used through the [Dashboard Copy Tool]() link. See the Building section for steps to run this locally.
 
