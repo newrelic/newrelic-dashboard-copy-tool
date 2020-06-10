@@ -60,7 +60,7 @@ You can run the copy tool locally using the following steps:
 
 New Relic hosts and moderates an online forum where you can interact with New Relic employees as well as other customers to get help and share best practices. Like all official New Relic open source projects, there's a related Community topic in the New Relic Explorers Hub. You can find this project's topic/threads here:
 
->Add the url for the support thread here
+https://discuss.newrelic.com/t/new-relic-dashboard-copying-tool/104393
 
 ## Contributing
 
