@@ -16,12 +16,12 @@ A note on cross-account charts:
 Dashboards can have charts that show data from different accounts. However, the dashboard API will only show details for charts with the same account ID as the API key. [Cross-account charts will be inaccessible](https://docs.newrelic.com/docs/insights/insights-api/manage-dashboards/insights-dashboard-api#requirements) by the API and fail to copy.
 
 ## Installation
-This tool does not need to be installed and can be used through the [Dashboard Copy Tool]() link. See the **Building** section for steps to run the copy tool locally.
+This tool does not need to be installed and can be used through the [Dashboard Copy Tool](https://newrelic.github.io/newrelic-dashboard-copy-tool/) link. See the **Building** section for steps to run the copy tool locally.
 
 ## Getting Started
 You need a REST API key for each account. Please refer to the [API key documentation](https://docs.newrelic.com/docs/apis/get-started/intro-apis/types-new-relic-api-keys#rest-api-key) for information on creating this API key.
 
-Follow the link to use the [Dashboard Copy Tool]()
+Follow the link to use the [Dashboard Copy Tool](https://newrelic.github.io/newrelic-dashboard-copy-tool/)
 
 ## Usage
 Get list of dashboards:
