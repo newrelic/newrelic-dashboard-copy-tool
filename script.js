@@ -139,8 +139,6 @@ function setRegionUrl(region, type) {
   } else if (type == 'destination') {
     destinationRegionUrl = tempRegionUrl;
   }
-  console.log(sourceRegionUrl);
-  console.log(destinationRegionUrl);
 }
 
 function getQueryString() {
@@ -154,6 +152,7 @@ function listDashboards() {
   sourceKeyInput.readOnly = true;
   clearUIResults();
   setRegionUrl(sourceRegionButton, 'source');
+  console.log('source API: ', sourceRegionUrl);
 
   const request = new XMLHttpRequest();
   request.open('GET', getQueryString());
@@ -212,9 +211,11 @@ function getDashboardIds() {
 }
 
 
-// Retrieves a selected dashboard and pass to sanitizeDashboard.
+// Retrieves a selected dashboard then pass to checkLayout
 function getDashboard(dashboard, uuid) {
   setRegionUrl(destinationRegionButton, 'destination');
+  console.log('destination API: ', destinationRegionUrl);
+  
   const id = dashboard.id;
   var sourceKey = $('#api-key-from-input').val();
   $.ajax({
@@ -227,13 +228,35 @@ function getDashboard(dashboard, uuid) {
   }).done(function (response) { // response === dashboard schema
     document.getElementById(uuid).setAttribute('style', "background: yellow;")
     document.getElementById(uuid).getElementsByClassName('status')[0].innerHTML = ' - copying...'
-    sanitizeDashboard(response, uuid);
+    checkLayout(response, uuid);
   }).fail(function (xhr, textStatus, error) {
     console.log('Errors', textStatus, error);
     document.getElementById(uuid).setAttribute('style', "background: red;")
     document.getElementById(uuid).getElementsByClassName('status')[0].innerHTML = ' - failed!'
   })
   // NOTE: no error handling
+}
+
+// Try to determine if the dashboard has NR1 layout (12 column) then pass to sanitizeDashboard
+function checkLayout(response, uuid) {
+  console.log('checking dashboard layout:', response)
+  const nr1TextNode = document.createTextNode(" (NR1 layout)")
+
+  // Loop through the charts checking width, height, and column size
+  if (response.dashboard.widgets) {
+    response.dashboard.widgets.forEach(widget => {
+      if (widget.layout.width > 3 || widget.layout.height > 3 || widget.layout.column > 3) {
+        console.log('NR1 layout detected:', response)
+        document.getElementById(uuid).appendChild(nr1TextNode)
+        // Add element grid_column_count to dashboard and set for NR1 layout
+        response.dashboard.grid_column_count = 12
+      } else {
+        console.log('Insights layout detected:', response)
+      }
+    })
+  }
+
+  sanitizeDashboard(response, uuid)
 }
 
 // Removes account specific details and check for existing facet links
@@ -244,7 +267,7 @@ function sanitizeDashboard(response, uuid) {
   oldDashboardId = response.dashboard.id;
 
   // Remove dashboard details which will be recreated on new account
-  const attributes = ['id', 'created_at', 'updated_at', 'owner_email', 'account_id', 'api_url', 'ui_url', 'description']
+  const attributes = ['id', 'created_at', 'updated_at', 'owner_email', 'account_id', 'api_url', 'ui_url']
   attributes.forEach(attribute => delete response.dashboard[attribute]);
 
   // Loop through the charts looking for facet links

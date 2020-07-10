@@ -7,12 +7,10 @@ The Dashboard Copy Tool allows you to copy dashboards between New Relic accounts
 * Copies dashboards between any account
 * Copies dashboards between US and EU regions
 * Detects when charts have [facet filtering](https://docs.newrelic.com/docs/dashboards/new-relic-one-dashboards/manage-your-dashboard/filter-new-relic-one-dashboards-facets) enabled to "current dashboard" and preserves the setting
-
-A note on dashboard layouts:
-
-Currently the dashboard API only handles the [3-column layout](https://docs.newrelic.com/docs/insights/insights-api/manage-dashboards/insights-dashboard-api#schema) used by the Insights UI. Dashboards that have been created or modified in New Relic One use a 12-column layout. The layout for New Relic One dashboards may need to be edited after transfering.
+* Detects if dashboard layout is New Relic One or Insights. The original layout will be preserved
 
 A note on cross-account charts:
+
 Dashboards can have charts that show data from different accounts. However, the dashboard API will only show details for charts with the same account ID as the API key. [Cross-account charts will be inaccessible](https://docs.newrelic.com/docs/insights/insights-api/manage-dashboards/insights-dashboard-api#requirements) by the API and fail to copy.
 
 ## Installation
@@ -26,8 +24,8 @@ Follow the link to use the [Dashboard Copy Tool](https://newrelic.github.io/newr
 ## Usage
 Get list of dashboards:
 * Enter a source REST API key
-* Search for a dashboard [optional]. You can add a search term later.
-* Choose region US/EU.
+* Search for a dashboard [optional]. You can add a search term later
+* Choose region US/EU
 * Get Dashboards!
 
 Choose dashboards to copy:
@@ -50,11 +48,11 @@ Changing the destination API key will also enable the **Transfer** button. This 
 
 You can run the copy tool locally using the following steps:
 
-1. clone the repo.
-2. `cd` to the repo folder.
-3. Run `npm install`.
-4. Run `node start.js`.
-5. Navigate to `http://localhost:8080`to view the local build.
+1. clone the repo
+2. `cd` to the repo folder
+3. Run `npm install`
+4. Run `node start.js`
+5. Navigate to `http://localhost:8080`to view the local build
 
 ## Support
 
