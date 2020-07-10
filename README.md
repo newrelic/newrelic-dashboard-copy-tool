@@ -7,7 +7,7 @@ The Dashboard Copy Tool allows you to copy dashboards between New Relic accounts
 * Copies dashboards between any account
 * Copies dashboards between US and EU regions
 * Detects when charts have [facet filtering](https://docs.newrelic.com/docs/dashboards/new-relic-one-dashboards/manage-your-dashboard/filter-new-relic-one-dashboards-facets) enabled to "current dashboard" and preserves the setting
-* Detects and preserves if layout for New Relic One or Insights
+* Detects if dashboard layout is New Relic One or Insights. The original layout will be preserved
 
 A note on cross-account charts:
 
