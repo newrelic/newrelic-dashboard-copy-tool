@@ -2,7 +2,7 @@
 
 # New Relic Dashboard Copy Tool
 
-The Dashboard Copy Tool allows you to copy dashboards between New Relic accounts using a [REST API key](https://docs.newrelic.com/docs/apis/get-started/intro-apis/types-new-relic-api-keys#rest-api-key). The copy tool:
+The Dashboard Copy Tool allows you to copy dashboards between New Relic accounts using a [Admin API key](https://docs.newrelic.com/docs/apis/get-started/intro-apis/types-new-relic-api-keys#admin). The copy tool:
 
 * Copies dashboards between any account
 * Copies dashboards between US and EU regions
@@ -17,13 +17,13 @@ Dashboards can have charts that show data from different accounts. However, the 
 This tool does not need to be installed and can be used through the [Dashboard Copy Tool](https://newrelic.github.io/newrelic-dashboard-copy-tool/) link. See the **Building** section for steps to run the copy tool locally.
 
 ## Getting Started
-You need a REST API key for each account. Please refer to the [API key documentation](https://docs.newrelic.com/docs/apis/get-started/intro-apis/types-new-relic-api-keys#rest-api-key) for information on creating this API key.
+You need an Admin API key for each account. Please refer to the [API key documentation](https://docs.newrelic.com/docs/apis/get-started/intro-apis/types-new-relic-api-keys#admin) for information on creating this API key.
 
 Follow the link to use the [Dashboard Copy Tool](https://newrelic.github.io/newrelic-dashboard-copy-tool/)
 
 ## Usage
 Get list of dashboards:
-* Enter a source REST API key
+* Enter a source Admin API key
 * Search for a dashboard [optional]. You can add a search term later
 * Choose region US/EU
 * Get Dashboards!
@@ -33,7 +33,7 @@ Choose dashboards to copy:
 * Clicking dashboards on your copy list removes them
 
 Copy dashboards:
-* Enter a destination REST API key
+* Enter a destination Admin API key
 * Self-facet filters are preserved by default
 * Choose region US/EU
 * Transfer Dashboards!
